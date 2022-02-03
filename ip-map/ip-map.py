@@ -1,6 +1,6 @@
 # Requirements
 import shodan
-import re
+# import re
 import os
 import sys
 import time
@@ -210,5 +210,5 @@ if __name__ == "__main__":
         ptrSuccess("import ipList.txt ...")
         shodan_ip()
     else:
-        ptrSuccess("Search Wichout ipList.txt ...")
+        ptrSuccess("Search Without ipList.txt ...")
         search_func()
