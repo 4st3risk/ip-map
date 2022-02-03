@@ -4,6 +4,7 @@ import re
 import os
 import sys
 import time
+import readline
 from colorama import Fore, init
 from shodan.cli.helpers import get_api_key
 
@@ -34,10 +35,6 @@ search_words = ['IP: ','Port: ','OS: ','Organization: ','Layer: ','Domains: ','H
 # 3 = save iplist
 # 4 = save both
 # 5 = save ip result
-
-temp = ''
-file_name = ''
-
 
 # Write On File
 def writer(file_name,data):
@@ -108,6 +105,7 @@ def search_func():
     try:
         data = ''
         flag = 0
+        file_name = ''
 
         # Select Save Result File
         temp = ptrChoice("Do you want to save the result file?")
@@ -140,7 +138,11 @@ def search_func():
 
         shodan_search(flag, data, file_name, query)
 
-        
+    except KeyboardInterrupt:
+        print("\n")
+        ptrAlert("Keyboard Interrupt Detected. Terminate Program")
+        exit()
+
     # Error Exception
     except shodan.APIError as e:
         ptrAlert("Shodan Error: {0}".format(e))
@@ -187,6 +189,11 @@ def shodan_ip():
                 
         else:
             ptrAlert("Error File \"ipList.txt\" Does not Exist")
+    
+    except KeyboardInterrupt:
+        print("\n")
+        ptrAlert("Keyboard Interrupt Detected. Terminate Program")
+        exit()
 
     # Error Exception
     except shodan.APIError as e:
